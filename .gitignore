@@ -1,0 +1,31 @@
+# Python specific
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environments
+venv/
+env/
+env.bak/
+
+# IDE specific
+.vscode/
+.idea/
+
+# Compiled files
+*.pyd
+*.so
+*.dll
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+.cache
+
+# Variables
+.env

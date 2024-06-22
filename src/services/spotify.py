@@ -16,13 +16,16 @@ scope = (
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
+
 def next_song():
     sp.next_track()
     return {"message": "Next Song"}
 
+
 def previous_song():
     sp.previous_track()
     return {"message": "Previous Song"}
+
 
 def change_playback():
     current_playback = sp.current_playback()
@@ -34,6 +37,7 @@ def change_playback():
     else:
         sp.start_playback()
         return {"message": "Started playback"}
+
 
 def shuffle():
     current_playback = sp.current_playback()
@@ -47,10 +51,12 @@ def shuffle():
         sp.shuffle(state=True)
         return {"message": "Shuffle activated"}
 
+
 def woev_playlist():
     sp.shuffle(state=True)
     sp.start_playback(context_uri="spotify:playlist:6uj2V0i1h2yEO8TDYcdtUc")
     return {"message": "Playing Woev Playlist"}
+
 
 def trinkgut():
     sp.repeat(state="Track")
@@ -60,6 +66,7 @@ def trinkgut():
         ]
     )
     return {"message": "Playing Trinkgut Playlist"}
+
 
 def search(query: str):
     search_results = sp.search(q=query, limit=50)
@@ -72,8 +79,10 @@ def search(query: str):
             song_name = track['name']
             for artist in track['artists']:
                 track_artists.append(artist['name'])
-            songs.append({'song_name': song_name, 'artists': ', '.join(track_artists), 'song_id': track['id'], 'album_cover': track['album']['images'][0]['url']})
+            songs.append({'song_name': song_name, 'artists': ', '.join(track_artists), 'song_id': track['id'],
+                          'album_cover': track['album']['images'][0]['url']})
     return songs
+
 
 def queue_add(song_id: str):
     if not song_id:
@@ -81,6 +90,7 @@ def queue_add(song_id: str):
     else:
         sp.add_to_queue(song_id)
         return {"message": "Added Song to queue"}
+
 
 def get_queue():
     queue = sp.queue()
@@ -93,8 +103,10 @@ def get_queue():
             song_name = track['name']
             for artist in track['artists']:
                 track_artists.append(artist['name'])
-            queue_songs.append({'song_name': song_name, 'artists': ', '.join(track_artists), 'album_cover': track['album']['images'][0]['url']})
+            queue_songs.append({'song_name': song_name, 'artists': ', '.join(track_artists),
+                                'album_cover': track['album']['images'][0]['url']})
     return queue_songs
+
 
 def get_current_song():
     current_song = sp.currently_playing()
@@ -106,4 +118,5 @@ def get_current_song():
         song_name = track['name']
         for artist in track['artists']:
             track_artists.append(artist['name'])
-        return {'song_name': song_name, 'artists': ', '.join(track_artists), 'album_cover': track['album']['images'][0]['url']}
+        return {'song_name': song_name, 'artists': ', '.join(track_artists),
+                'album_cover': track['album']['images'][0]['url']}

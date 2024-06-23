@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
+from src.services.auth_service import oauth2_scheme
 import src.services.spotify_service as spotify
 
 playback_router = APIRouter()
@@ -13,37 +14,37 @@ async def current_song():
 
 
 @playback_router.post("/next")
-async def next_song():
+async def next_song(token: str = Depends(oauth2_scheme)):
     response = spotify.next_song()
     return response
 
 
 @playback_router.post("/previous")
-async def previous_song():
+async def previous_song(token: str = Depends(oauth2_scheme)):
     response = spotify.previous_song()
     return response
 
 
 @playback_router.post("/play-pause")
-async def play_pause():
+async def play_pause(token: str = Depends(oauth2_scheme)):
     response = spotify.change_playback()
     return response
 
 
 @playback_router.post("/shuffle")
-async def shuffle():
+async def shuffle(token: str = Depends(oauth2_scheme)):
     response = spotify.shuffle()
     return response
 
 
 @quickplay_router.post("/woev-playlist")
-async def woev_playlist():
+async def woev_playlist(token: str = Depends(oauth2_scheme)):
     response = spotify.woev_playlist()
     return response
 
 
 @quickplay_router.post("/trinkgut")
-async def trinkgut():
+async def trinkgut(token: str = Depends(oauth2_scheme)):
     response = spotify.trinkgut()
     return response
 

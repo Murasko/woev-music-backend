@@ -7,9 +7,9 @@ from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 
-from src.models.user_models import fake_users_db
-from src.models.token_models import TokenData
-from src.models.user_models import User, UserInDB
+from src.models.pydantic_models.user_models import fake_users_db
+from src.models.pydantic_models.token_models import TokenData
+from src.models.pydantic_models.user_models import User, UserInDB
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
